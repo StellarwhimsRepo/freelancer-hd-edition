@@ -1,0 +1,23 @@
+name: Mirror to Forgejo
+
+on:
+  schedule:
+    # Run every day at 1 pm
+    - cron: '0 13 1 * *'
+  workflow_dispatch: # Allow manual trigger
+
+jobs:
+  mirror:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Fetch upstream
+        run: |
+          if [ ! -d upstream ]; then
+            git clone --mirror https://github.com/StellarwhimsRepo/freelancer-hd-edition.git upstream
+          else
+            cd upstream
+            git fetch --all
+          fi
+          cd upstream
+          git remote add target https://StellarWhimsRepo:${{ secrets.FREELANCERHDEDITION_FORGEJO_MIRROR_PAT }}@forgejo.stellarwhims.com/StellarwhimsRepo/freelancer-hd-edition_Mirror.git
+          git push target --mirror
