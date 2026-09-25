@@ -19,5 +19,5 @@ jobs:
             git fetch --all
           fi
           cd upstream
-          git remote add target https://StellarWhimsRepo:${{ secrets.FREELANCERHDEDITION_FORGEJO_MIRROR_PAT }}@forgejo.stellarwhims.com/StellarwhimsRepo/freelancer-hd-edition_Mirror.git
+          git remote add target https://StellarWhimsRepo:${{ secrets.FREELANCERHDEDITION_FORGEJO_MIRROR_PAT }}@forgejo.stellarwhims.com/FLHDE/freelancer-hd-edition_Mirror.git
           git push target --mirror
